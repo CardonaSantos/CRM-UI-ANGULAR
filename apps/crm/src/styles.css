@@ -1,0 +1,27 @@
+/* Entrada global de estilos del CRM.
+   Orden: capas de Tailwind → reset de paleta → preset de spartan → tokens
+   NOVA (sin capa, para que siempre ganen sobre los defaults de Tailwind). */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+
+@import '../../../libs/app/src/theme/tailwind-palette.css';
+@import '@spartan-ng/brain/hlm-tailwind-preset.css';
+
+@import '../../../libs/app/src/theme/app-theme.css';
+@import '../../../libs/app/src/theme/app-tokens.css';
+@import '../../../libs/app/src/theme/app-tailwind.css';
+
+/* Tailwind escanea todo el monorepo (apps/ y libs/). */
+@source '../../../libs';
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

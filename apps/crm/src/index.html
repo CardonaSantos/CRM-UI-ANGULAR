@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>NOVA CRM</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="logo-nova.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Aplica las preferencias de UI guardadas antes del bootstrap para evitar
+         el parpadeo de tema. Debe usar la misma clave que ThemeService
+         (libs/core/theme). El color de acento lo aplica ThemeService. -->
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('nova:ui-preferences');
+          var p = raw ? JSON.parse(raw) : {};
+          var root = document.documentElement;
+          var appearance = p.appearance || 'system';
+          var dark =
+            appearance === 'dark' ||
+            (appearance === 'system' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          root.classList.toggle('dark', dark);
+          root.style.colorScheme = dark ? 'dark' : 'light';
+          if (p.density) root.dataset.density = p.density;
+          if (p.radius) root.dataset.radius = p.radius;
+          if (p.scale) root.style.setProperty('--app-scale', String(p.scale));
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

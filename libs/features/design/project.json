@@ -1,0 +1,10 @@
+{
+  "name": "feature-design",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/features/design/src",
+  "prefix": "nv",
+  "projectType": "library",
+  "tags": ["type:feature", "scope:design"],
+  "// targets": "to see all targets run: nx show project feature-design --web",
+  "targets": {}
+}

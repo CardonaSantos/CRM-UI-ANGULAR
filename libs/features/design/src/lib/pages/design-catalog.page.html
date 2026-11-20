@@ -1,0 +1,28 @@
+<app-page
+  title="Catálogo de diseño"
+  description="Componentes del kit @nova/app con tema, escala y densidad en vivo."
+  [breadcrumbs]="[{ label: 'Inicio', link: '/' }, { label: 'Catálogo de diseño' }]"
+  [actions]="actions"
+>
+  <app-tabs [tabs]="tabs" [value]="activeTab()" (valueChange)="selectTab($event)" ariaLabel="Secciones del catálogo">
+    <ng-template appTab="tema">
+      <app-split>
+        <app-card appSplitAside title="Apariencia" description="Se aplica a toda la app y se guarda en este navegador.">
+          <app-appearance-panel />
+        </app-card>
+        <nv-catalog-actions />
+      </app-split>
+    </ng-template>
+    <ng-template appTab="acciones"><nv-catalog-actions /></ng-template>
+    <ng-template appTab="formularios"><nv-catalog-forms /></ng-template>
+    <ng-template appTab="overlays"><nv-catalog-overlays /></ng-template>
+    <ng-template appTab="feedback"><nv-catalog-feedback /></ng-template>
+    <ng-template appTab="tabla"><nv-catalog-table /></ng-template>
+    <ng-template appTab="datos"><nv-catalog-display /></ng-template>
+    <ng-template appTab="layout"><nv-catalog-layout /></ng-template>
+  </app-tabs>
+
+  <app-drawer title="Apariencia" side="right" [padded]="true" [(open)]="appearanceOpen">
+    <app-appearance-panel />
+  </app-drawer>
+</app-page>

@@ -1,0 +1,36 @@
+<app-centered-screen>
+  <app-card
+    title="Acceso al CRM"
+    description="Ingresa tus credenciales para acceder al sistema"
+    width="md"
+    [footnote]="'Sistema de gestión CRM © ' + year"
+  >
+    <form novalidate (submit)="onSubmit($event)">
+      <app-stack gap="md">
+        <app-field label="Correo electrónico" for="correo" [field]="f.correo">
+          <app-input
+            inputId="correo"
+            type="email"
+            placeholder="correo@ejemplo.com"
+            autocomplete="email"
+            [formField]="f.correo"
+          />
+        </app-field>
+
+        <app-field label="Contraseña" for="contrasena" [field]="f.contrasena">
+          <app-input
+            inputId="contrasena"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            [formField]="f.contrasena"
+          />
+        </app-field>
+
+        <app-button type="submit" [block]="true" [loading]="login.isPending()">
+          {{ login.isPending() ? 'Verificando…' : 'Iniciar sesión' }}
+        </app-button>
+      </app-stack>
+    </form>
+  </app-card>
+</app-centered-screen>

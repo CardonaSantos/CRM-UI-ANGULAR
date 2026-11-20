@@ -1,0 +1,10 @@
+{
+  "name": "app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/app/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": ["type:app-ui"],
+  "// targets": "to see all targets run: nx show project app --web",
+  "targets": {}
+}

@@ -1,0 +1,87 @@
+/* ============================================================================
+   NOVA — tokens nuevos (Fase 0) y puente hacia Tailwind v4 / spartan helm.
+
+   - app-theme.css (migrado tal cual desde POS-UI) define la paleta --app-*
+     como tripletas HSL ("163 72% 45%").
+   - Aquí se agregan escala, densidad y radio globales (guía §6.1) y se
+     traducen los aliases que consume spartan (--primary, --border, …) a
+     colores completos con hsl().
+============================================================================ */
+
+:root {
+  /* ---- Escala / densidad / radio (los controla ThemeService) ---- */
+  --app-scale: 1; /* 0.875 | 1 | 1.125 | 1.25 */
+  --app-density: 1; /* compact .85 | comfortable 1 | spacious 1.2 */
+  --app-radius-base: 0.5rem;
+
+  --app-space-1: calc(0.25rem * var(--app-density));
+  --app-space-2: calc(0.5rem * var(--app-density));
+  --app-space-3: calc(0.75rem * var(--app-density));
+  --app-space-4: calc(1rem * var(--app-density));
+  --app-space-6: calc(1.5rem * var(--app-density));
+  --app-space-8: calc(2rem * var(--app-density));
+
+  --app-control-h-sm: calc(2rem * var(--app-density));
+  --app-control-h-md: calc(2.25rem * var(--app-density));
+  --app-control-h-lg: calc(2.625rem * var(--app-density));
+
+  /* Tailwind v4 deriva TODO su espaciado (p-*, gap-*, h-*) de --spacing:
+     así la densidad global se aplica también a helm sin tocarlo. */
+  --spacing: calc(0.25rem * var(--app-density));
+
+  /* ---- Puente spartan/shadcn: colores completos ---- */
+  --background: hsl(var(--app-background));
+  --foreground: hsl(var(--app-foreground));
+  --card: hsl(var(--app-surface));
+  --card-foreground: hsl(var(--app-surface-foreground));
+  --popover: hsl(var(--app-popover));
+  --popover-foreground: hsl(var(--app-popover-foreground));
+  --primary: hsl(var(--app-primary));
+  --primary-foreground: hsl(var(--app-primary-foreground));
+  --secondary: hsl(var(--app-secondary));
+  --secondary-foreground: hsl(var(--app-secondary-foreground));
+  --muted: hsl(var(--app-muted));
+  --muted-foreground: hsl(var(--app-muted-foreground));
+  --accent: hsl(var(--app-brand-mint));
+  --accent-foreground: hsl(var(--app-foreground));
+  --destructive: hsl(var(--app-danger));
+  --destructive-foreground: hsl(var(--app-danger-foreground));
+  --border: hsl(var(--app-border));
+  --input: hsl(var(--app-input-border, var(--app-border)));
+  --ring: hsl(var(--app-ring));
+  --radius: var(--app-radius-base);
+
+  --sidebar: hsl(var(--app-surface));
+  --sidebar-foreground: hsl(var(--app-foreground));
+  --sidebar-primary: hsl(var(--app-primary));
+  --sidebar-primary-foreground: hsl(var(--app-primary-foreground));
+  --sidebar-accent: hsl(var(--app-muted));
+  --sidebar-accent-foreground: hsl(var(--app-foreground));
+  --sidebar-border: hsl(var(--app-border));
+  --sidebar-ring: hsl(var(--app-ring));
+
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
+}
+
+/* La escala mueve el rem raíz: todo lo que esté en rem escala con ella. */
+html {
+  font-size: calc(16px * var(--app-scale));
+}
+
+html[data-density='compact'] {
+  --app-density: 0.85;
+}
+html[data-density='spacious'] {
+  --app-density: 1.2;
+}
+
+html[data-radius='none'] {
+  --app-radius-base: 0rem;
+}
+html[data-radius='sm'] {
+  --app-radius-base: 0.25rem;
+}
+html[data-radius='lg'] {
+  --app-radius-base: 0.75rem;
+}

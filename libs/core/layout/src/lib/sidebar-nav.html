@@ -1,0 +1,39 @@
+<nav class="flex flex-col gap-1 p-3 text-sm" aria-label="Navegación principal">
+  @for (item of items(); track item.label + (item.path ?? '')) {
+    @if (item.children) {
+      <!-- Los grupos arrancan desplegados; el usuario puede plegarlos. -->
+      <details class="group" open>
+        <summary
+          class="hover:bg-sidebar-accent flex cursor-pointer list-none items-center gap-3 rounded-md px-3 py-2 font-medium select-none [&::-webkit-details-marker]:hidden"
+        >
+          @if (item.icon) {
+            <ng-icon [name]="item.icon" class="shrink-0 text-base" />
+          }
+          <span class="flex-1 truncate">{{ item.label }}</span>
+          <ng-icon name="lucideChevronDown" class="text-muted-foreground shrink-0 transition-transform group-open:rotate-180" />
+        </summary>
+        <div class="mt-1 ml-5 flex flex-col gap-1 border-l pl-3">
+          @for (child of item.children; track child.path) {
+            <a
+              [routerLink]="child.path"
+              routerLinkActive="bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+              class="hover:bg-sidebar-accent text-muted-foreground hover:text-sidebar-foreground truncate rounded-md px-3 py-2"
+              >{{ child.label }}</a
+            >
+          }
+        </div>
+      </details>
+    } @else {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="bg-sidebar-accent text-sidebar-accent-foreground"
+        class="hover:bg-sidebar-accent flex items-center gap-3 rounded-md px-3 py-2 font-medium"
+      >
+        @if (item.icon) {
+          <ng-icon [name]="item.icon" class="shrink-0 text-base" />
+        }
+        <span class="truncate">{{ item.label }}</span>
+      </a>
+    }
+  }
+</nav>

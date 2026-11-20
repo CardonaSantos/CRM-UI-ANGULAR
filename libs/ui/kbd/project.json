@@ -1,0 +1,12 @@
+{
+  "name": "kbd",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/kbd/src",
+  "prefix": "hlm",
+  "projectType": "library",
+  "tags": [
+    "type:ui"
+  ],
+  "// targets": "to see all targets run: nx show project kbd --web",
+  "targets": {}
+}

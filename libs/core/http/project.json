@@ -1,0 +1,10 @@
+{
+  "name": "core-http",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core/http/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": ["type:core", "scope:http"],
+  "// targets": "to see all targets run: nx show project core-http --web",
+  "targets": {}
+}

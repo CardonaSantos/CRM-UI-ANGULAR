@@ -1,0 +1,41 @@
+<div class="flex min-h-dvh">
+  <aside class="bg-sidebar text-sidebar-foreground sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r lg:flex">
+    <a href="/" class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+      <img src="logo-nova.png" alt="" class="size-7" />
+      <span class="font-heading text-lg font-semibold">NOVA CRM</span>
+    </a>
+    <nv-sidebar-nav class="min-h-0 flex-1 overflow-y-auto" />
+  </aside>
+
+  <div class="flex min-w-0 flex-1 flex-col">
+    <header class="bg-background sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b px-2 sm:px-4">
+      <div class="lg:hidden">
+        <app-icon-button icon="lucideMenu" label="Abrir menú" (click)="menuOpen.set(true)" />
+      </div>
+      <span class="font-heading text-lg font-semibold lg:hidden">NOVA CRM</span>
+
+      <div class="ml-auto flex items-center gap-1 sm:gap-3">
+        @if (auth.user(); as user) {
+          <div class="hidden flex-col items-end leading-tight sm:flex">
+            <span class="text-sm font-medium">{{ user.nombre }}</span>
+            <span class="text-muted-foreground text-xs">{{ roleLabel[user.rol] }}</span>
+          </div>
+        }
+        <app-icon-button
+          [icon]="theme.isDark() ? 'lucideSun' : 'lucideMoon'"
+          [label]="theme.isDark() ? 'Usar modo claro' : 'Usar modo oscuro'"
+          (click)="toggleDark()"
+        />
+        <app-icon-button icon="lucideLogOut" label="Cerrar sesión" (click)="logout()" />
+      </div>
+    </header>
+
+    <main class="min-w-0 flex-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>
+
+<app-drawer [(open)]="menuOpen" title="NOVA CRM">
+  <nv-sidebar-nav />
+</app-drawer>

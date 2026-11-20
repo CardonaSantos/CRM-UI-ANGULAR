@@ -1,0 +1,60 @@
+/* ============================================================================
+   NOVA — utilidades de Tailwind derivadas de los tokens --app-*.
+   Solo el kit (libs/app) las usa; las features consumen componentes.
+   `inline` hace que la utilidad lea la variable en tiempo de ejecución, así
+   el modo oscuro y el acento cambian sin recompilar.
+============================================================================ */
+@theme inline {
+  /* Estados */
+  --color-success: hsl(var(--app-success));
+  --color-success-foreground: hsl(var(--app-success-foreground));
+  --color-warning: hsl(var(--app-warning));
+  --color-warning-foreground: hsl(var(--app-warning-foreground));
+  --color-info: hsl(var(--app-info));
+  --color-info-foreground: hsl(var(--app-info-foreground));
+  --color-danger: hsl(var(--app-danger));
+  --color-danger-foreground: hsl(var(--app-danger-foreground));
+
+  /* Fondos suaves (badges, iconos de KPI, timeline) */
+  --color-neutral-soft: hsl(var(--app-badge-neutral-bg));
+  --color-neutral-soft-foreground: hsl(var(--app-badge-neutral-foreground));
+  --color-primary-soft: hsl(var(--app-badge-primary-soft-bg));
+  --color-primary-soft-foreground: hsl(var(--app-badge-primary-soft-foreground));
+  --color-success-soft: hsl(var(--app-badge-success-soft-bg));
+  --color-success-soft-foreground: hsl(var(--app-badge-success-soft-foreground));
+  --color-warning-soft: hsl(var(--app-badge-warning-soft-bg));
+  --color-warning-soft-foreground: hsl(var(--app-badge-warning-soft-foreground));
+  --color-danger-soft: hsl(var(--app-badge-danger-soft-bg));
+  --color-danger-soft-foreground: hsl(var(--app-badge-danger-soft-foreground));
+  --color-info-soft: hsl(var(--app-badge-info-soft-bg));
+  --color-info-soft-foreground: hsl(var(--app-badge-info-soft-foreground));
+
+  /* Alertas */
+  --color-alert-neutral: hsl(var(--app-alert-bg-neutral));
+  --color-alert-neutral-border: hsl(var(--app-alert-border-neutral));
+  --color-alert-neutral-foreground: hsl(var(--app-alert-foreground-neutral));
+  --color-alert-info: hsl(var(--app-alert-bg-info));
+  --color-alert-info-border: hsl(var(--app-alert-border-info));
+  --color-alert-info-foreground: hsl(var(--app-alert-foreground-info));
+  --color-alert-success: hsl(var(--app-alert-bg-success));
+  --color-alert-success-border: hsl(var(--app-alert-border-success));
+  --color-alert-success-foreground: hsl(var(--app-alert-foreground-success));
+  --color-alert-warning: hsl(var(--app-alert-bg-warning));
+  --color-alert-warning-border: hsl(var(--app-alert-border-warning));
+  --color-alert-warning-foreground: hsl(var(--app-alert-foreground-warning));
+  --color-alert-danger: hsl(var(--app-alert-bg-danger));
+  --color-alert-danger-border: hsl(var(--app-alert-border-danger));
+  --color-alert-danger-foreground: hsl(var(--app-alert-foreground-danger));
+
+  /* Tabla y skeleton */
+  --color-table-header: hsl(var(--app-table-header-bg));
+  --color-table-header-foreground: hsl(var(--app-table-header-foreground));
+  --color-table-selected: hsl(var(--app-table-row-selected-bg));
+  --color-skeleton: hsl(var(--app-skeleton-bg));
+
+  --font-heading: var(--app-font-heading);
+  --shadow-xs: var(--app-shadow-xs);
+  --shadow-sm: var(--app-shadow-sm);
+  --shadow-md: var(--app-shadow-md);
+  --shadow-lg: var(--app-shadow-lg);
+}

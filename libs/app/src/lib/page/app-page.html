@@ -1,0 +1,79 @@
+<ng-template #filtersTpl><ng-content select="[appPageFilters]" /></ng-template>
+
+@if (breadcrumbs().length) {
+  <nav hlmBreadcrumb ariaLabel="Ruta de navegación" class="hidden sm:block">
+    <ol hlmBreadcrumbList>
+      @for (crumb of breadcrumbs(); track $index) {
+        <li hlmBreadcrumbItem>
+          @if (crumb.link && !$last) {
+            <a hlmBreadcrumbLink [link]="crumb.link">{{ crumb.label }}</a>
+          } @else {
+            <span hlmBreadcrumbPage>{{ crumb.label }}</span>
+          }
+        </li>
+        @if (!$last) {
+          <li hlmBreadcrumbSeparator></li>
+        }
+      }
+    </ol>
+  </nav>
+}
+
+<header class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+  <div class="flex min-w-0 items-start gap-2">
+    @if (backLink()) {
+      <a
+        [routerLink]="backLink()"
+        class="hover:bg-muted text-muted-foreground mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-md"
+        aria-label="Volver"
+      >
+        <ng-icon name="lucideArrowLeft" size="1.125rem" />
+      </a>
+    }
+    <div class="flex min-w-0 flex-col gap-1">
+      <h1 class="font-heading text-xl font-semibold break-words md:text-2xl" data-app-page-title>{{ title() }}</h1>
+      @if (description()) {
+        <p class="text-muted-foreground text-sm">{{ description() }}</p>
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-2">
+    <ng-content select="[appPageActions]" />
+    @for (action of inlineActions(); track action.label) {
+      <app-button
+        [variant]="action.variant ?? (action.primary ? 'primary' : 'outline')"
+        [leftIcon]="action.icon"
+        [disabled]="!!action.disabled"
+        (click)="action.run()"
+      >
+        {{ action.label }}
+      </app-button>
+    }
+    @if (filters() && bp.isMobile()) {
+      <app-button variant="outline" leftIcon="lucideSlidersHorizontal" (click)="filtersOpen.set(true)">
+        {{ filtersLabel() }}
+      </app-button>
+    }
+    @if (menuActions().length) {
+      <app-dropdown-menu [items]="menuActions()" variant="outline" />
+    }
+  </div>
+</header>
+
+@if (filters()) {
+  @if (bp.isMobile()) {
+    <app-drawer title="Filtros" side="bottom" [(open)]="filtersOpen">
+      <div class="flex flex-col gap-4 p-4">
+        <ng-container *ngTemplateOutlet="filtersTpl" />
+        <app-button [block]="true" (click)="filtersOpen.set(false)">Ver resultados</app-button>
+      </div>
+    </app-drawer>
+  } @else {
+    <section aria-label="Filtros" class="flex flex-wrap items-end gap-3">
+      <ng-container *ngTemplateOutlet="filtersTpl" />
+    </section>
+  }
+}
+
+<ng-content />

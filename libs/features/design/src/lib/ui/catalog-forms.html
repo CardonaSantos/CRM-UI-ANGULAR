@@ -1,0 +1,79 @@
+<app-stack gap="lg">
+  <app-section title="Formulario completo" description="Signal Forms + controles del kit. Envía vacío para ver las validaciones.">
+    <form novalidate (submit)="onSubmit($event)">
+      <app-stack gap="md">
+        <app-grid [cols]="{ base: 1, md: 2 }">
+          <app-field label="Nombre" for="fd-nombre" hint="Como aparece en el DPI" [field]="f.nombre">
+            <app-input inputId="fd-nombre" placeholder="Juan Pérez" [formField]="f.nombre" />
+          </app-field>
+          <app-field label="Correo" for="fd-correo" [field]="f.correo">
+            <app-input inputId="fd-correo" type="email" placeholder="correo@ejemplo.com" [formField]="f.correo" />
+          </app-field>
+          <app-field label="Teléfono" for="fd-tel" hint="8 dígitos" [field]="f.telefono">
+            <app-phone-input inputId="fd-tel" [formField]="f.telefono" />
+          </app-field>
+          <app-field label="Monto mensual" for="fd-monto" [field]="f.monto">
+            <app-money-input inputId="fd-monto" [formField]="f.monto" />
+          </app-field>
+          <app-field label="Sector (app-select)" for="fd-sector" [field]="f.sector">
+            <app-select inputId="fd-sector" [options]="sectores" [formField]="f.sector" />
+          </app-field>
+          <app-field label="Plan (app-combobox)" for="fd-plan" [field]="f.plan">
+            <app-combobox inputId="fd-plan" placeholder="Buscar plan…" [options]="planes" [formField]="f.plan" />
+          </app-field>
+          <app-field label="Servicios adicionales (app-combobox-multi)" for="fd-serv" [field]="f.servicios">
+            <app-combobox-multi inputId="fd-serv" placeholder="Agregar servicios…" [options]="servicios" [formField]="f.servicios" />
+          </app-field>
+          <app-field label="Fecha de instalación" for="fd-fecha" [field]="f.fechaInstalacion">
+            <app-date-picker inputId="fd-fecha" [formField]="f.fechaInstalacion" />
+          </app-field>
+          <app-field label="Periodo (app-date-range)" for="fd-periodo" [field]="f.periodo">
+            <app-date-range inputId="fd-periodo" [formField]="f.periodo" />
+          </app-field>
+          <app-field label="Mes de facturación" for="fd-mes" [field]="f.mesFacturacion">
+            <app-month-picker inputId="fd-mes" [formField]="f.mesFacturacion" />
+          </app-field>
+        </app-grid>
+
+        <app-field label="Tipo de cliente" [field]="f.tipo">
+          <app-radio-group direction="row" [options]="tipos" [formField]="f.tipo" />
+        </app-field>
+
+        <app-field label="Notas" for="fd-notas" [field]="f.notas">
+          <app-textarea inputId="fd-notas" placeholder="Referencias de la dirección…" [formField]="f.notas" />
+        </app-field>
+
+        <app-field label="Adjuntos" [field]="f.adjuntos">
+          <app-file-upload accept="image/*,.pdf" [multiple]="true" [maxSizeMb]="5" [formField]="f.adjuntos" />
+        </app-field>
+
+        <app-switch label="Cliente activo" description="Los clientes inactivos no generan facturas" [formField]="f.activo" />
+        <app-checkbox label="Acepto el contrato" description="Requerido para instalar" [formField]="f.acepta" />
+
+        <app-form-actions submitLabel="Guardar cliente" [loading]="saving()" (cancelled)="reset()" />
+      </app-stack>
+    </form>
+  </app-section>
+
+  <app-section title="Búsqueda" description="app-search-input (debounce) y app-combobox con búsqueda en servidor">
+    <app-grid [cols]="{ base: 1, md: 2 }">
+      <app-field label="Buscar" for="fd-buscar" [hint]="'Último texto enviado: ' + (lastSearch() || '—')">
+        <app-search-input inputId="fd-buscar" placeholder="Nombre, DPI o teléfono" (searched)="lastSearch.set($event)" />
+      </app-field>
+      <app-field label="Cliente (filterMode=server)" for="fd-cliente">
+        <app-combobox
+          inputId="fd-cliente"
+          filterMode="server"
+          placeholder="Escribe para buscar…"
+          [options]="clienteOptions()"
+          [(search)]="clienteSearch"
+          [(value)]="clienteId"
+        />
+      </app-field>
+    </app-grid>
+  </app-section>
+
+  <app-section title="Valor del modelo" description="Así llega a la mutación">
+    <app-code [value]="model()" />
+  </app-section>
+</app-stack>

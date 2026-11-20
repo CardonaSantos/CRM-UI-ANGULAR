@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - run: npm ci
+      - uses: nrwl/nx-set-shas@v4
+
+      # Reglas de la guía que no cubre ESLint (§13.3 y §13.4).
+      - run: npm run check:templates
+      - run: npm run check:size
+
+      # Lint (incluye límites entre módulos §13.1 e imports restringidos §13.2), tests y build.
+      - run: npx nx affected -t lint test build
+
+      # E2E (login en escritorio y móvil 360 px).
+      - run: npx playwright install --with-deps chromium
+      - run: npx nx affected -t e2e
