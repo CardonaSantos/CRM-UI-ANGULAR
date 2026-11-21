@@ -18,7 +18,7 @@ const WIDTH: Record<AppCardWidth, string> = {
   selector: 'app-card',
   imports: [HlmCardImports],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class]': 'hostClass()' },
+  host: { '[attr.title]': 'null', '[class]': 'hostClass()' },
   template: `
     <section hlmCard [size]="size() === 'sm' ? 'sm' : 'default'">
       @if (title() || description()) {

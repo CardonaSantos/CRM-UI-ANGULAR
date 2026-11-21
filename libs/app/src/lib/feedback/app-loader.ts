@@ -25,7 +25,9 @@ export class AppLoader {
   readonly size = input<'sm' | 'md' | 'lg'>('md');
   readonly block = input(false);
 
-  protected readonly spinnerClass = computed(() => ({ sm: 'size-4', md: 'size-6', lg: 'size-10' })[this.size()]);
+  // El spinner gira su propia caja: el tamaño va en `font-size` (el icono mide
+  // 1em) para que caja e icono coincidan y gire sobre su centro.
+  protected readonly spinnerClass = computed(() => ({ sm: 'text-base', md: 'text-2xl', lg: 'text-4xl' })[this.size()]);
 }
 
 export type AppSkeletonShape = 'text' | 'title' | 'avatar' | 'block' | 'button';

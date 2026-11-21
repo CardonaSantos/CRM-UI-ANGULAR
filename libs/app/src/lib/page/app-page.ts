@@ -33,7 +33,7 @@ export class AppPageFilters {}
   selector: 'app-page',
   imports: [HlmBreadcrumbImports, RouterLink, NgIcon, NgTemplateOutlet, AppButton, AppDropdownMenu, AppDrawer],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-4 p-4 md:gap-6 md:p-6' },
+  host: { '[attr.title]': 'null', class: 'mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-4 p-4 md:gap-6 md:p-6' },
   templateUrl: './app-page.html',
 })
 export class AppPage {

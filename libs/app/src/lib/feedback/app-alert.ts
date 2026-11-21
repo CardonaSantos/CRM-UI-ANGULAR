@@ -41,6 +41,9 @@ const TONE: Record<AppAlertTone, { box: string; icon: string; defaultIcon: strin
   imports: [NgIcon, HlmButton],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    // `title` es un input: sin esto queda como atributo y el navegador
+    // muestra un tooltip nativo sobre todo el componente.
+    '[attr.title]': 'null',
     '[class]': 'boxClass()',
     '[attr.role]': "tone() === 'danger' || tone() === 'warning' ? 'alert' : 'status'",
   },

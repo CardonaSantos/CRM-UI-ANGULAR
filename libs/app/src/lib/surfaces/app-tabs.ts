@@ -110,7 +110,7 @@ export class AppAccordion {}
   imports: [HlmAccordionTrigger, HlmAccordionContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [{ directive: BrnAccordionItem, inputs: ['isOpened: opened', 'disabled'] }],
-  host: { 'data-slot': 'accordion-item', class: 'flex flex-col not-last:border-b' },
+  host: { '[attr.title]': 'null', 'data-slot': 'accordion-item', class: 'flex flex-col not-last:border-b' },
   template: `
     <hlm-accordion-trigger>{{ title() }}</hlm-accordion-trigger>
     <hlm-accordion-content><ng-content /></hlm-accordion-content>

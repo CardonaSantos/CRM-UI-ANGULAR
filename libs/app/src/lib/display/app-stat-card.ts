@@ -14,7 +14,7 @@ export type AppStatFormat = 'number' | 'money' | 'percent' | 'text';
   selector: 'app-stat-card',
   imports: [NgIcon, HlmSkeleton],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: '@container block min-w-0 rounded-xl border bg-card p-4 text-card-foreground shadow-xs' },
+  host: { '[attr.title]': 'null', class: '@container block min-w-0 rounded-xl border bg-card p-4 text-card-foreground shadow-xs' },
   template: `
     <div class="flex items-start justify-between gap-3">
       <p class="text-muted-foreground text-sm font-medium">{{ title() }}</p>

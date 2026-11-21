@@ -7,7 +7,7 @@ import { HlmEmptyImports } from '@nova/ui/empty';
   selector: 'app-empty-state',
   imports: [HlmEmptyImports, NgIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'block w-full' },
+  host: { '[attr.title]': 'null', class: 'block w-full' },
   template: `
     <div hlmEmpty [class.py-6]="size() === 'sm'" [class.border]="bordered()" [class.border-dashed]="bordered()">
       <div hlmEmptyHeader>

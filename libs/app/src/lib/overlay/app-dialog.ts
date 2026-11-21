@@ -21,7 +21,7 @@ const SIZE: Record<AppDialogSize, string> = {
   selector: 'app-dialog',
   imports: [HlmDialogImports, HlmSheetImports, NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'contents' },
+  host: { '[attr.title]': 'null', class: 'contents' },
   template: `
     <ng-template #header>
       <h2 class="font-heading text-lg leading-none font-semibold">{{ title() }}</h2>

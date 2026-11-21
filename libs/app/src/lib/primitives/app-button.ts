@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import { NgIcon } from '@ng-icons/core';
 import { type ButtonVariants, HlmButton } from '@nova/ui/button';
 import { HlmSpinner } from '@nova/ui/spinner';
+import { BrnTooltip, type BrnTooltipPosition } from '@spartan-ng/brain/tooltip';
+import { provideAppTooltipOptions } from '../overlay/app-tooltip';
 
 export type AppButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link';
 export type AppButtonSize = 'sm' | 'md' | 'lg';
@@ -66,10 +68,14 @@ export class AppButton {
   protected readonly hlmSize = computed(() => SIZE[this.size()]);
 }
 
-/** Botón solo icono. `label` es obligatorio por accesibilidad. */
+/**
+ * Botón solo icono. `label` es obligatorio: es el nombre accesible y también
+ * el tooltip que aparece al pasar el mouse o enfocar (`[tooltip]="false"` lo quita).
+ */
 @Component({
   selector: 'app-icon-button',
-  imports: [HlmButton, NgIcon],
+  imports: [HlmButton, NgIcon, BrnTooltip],
+  providers: [provideAppTooltipOptions()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'contents' },
   template: `
@@ -80,7 +86,9 @@ export class AppButton {
       type="button"
       [disabled]="disabled()"
       [attr.aria-label]="label()"
-      [attr.title]="label()"
+      [brnTooltip]="label()"
+      [position]="tooltipPosition()"
+      [tooltipDisabled]="!tooltip()"
     >
       <ng-icon [name]="icon()" />
     </button>
@@ -89,6 +97,8 @@ export class AppButton {
 export class AppIconButton {
   readonly icon = input.required<string>();
   readonly label = input.required<string>();
+  readonly tooltip = input(true);
+  readonly tooltipPosition = input<BrnTooltipPosition>('top');
   readonly variant = input<AppButtonVariant>('ghost');
   readonly size = input<AppButtonSize>('md');
   readonly disabled = input(false);

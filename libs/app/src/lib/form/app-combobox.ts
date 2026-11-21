@@ -60,7 +60,7 @@ abstract class AppComboboxBase<T> extends AppControlBase {
       />
       <div *hlmComboboxPortal hlmComboboxContent>
         @if (loading()) {
-          <div class="text-muted-foreground flex items-center gap-2 p-3 text-sm"><hlm-spinner class="size-4" /> Buscando…</div>
+          <div class="text-muted-foreground flex items-center gap-2 p-3 text-sm"><hlm-spinner /> Buscando…</div>
         } @else {
           <hlm-combobox-empty>{{ emptyText() }}</hlm-combobox-empty>
         }
@@ -112,7 +112,7 @@ export class AppCombobox<T> extends AppComboboxBase<T> implements FormValueContr
       </hlm-combobox-chips>
       <div *hlmComboboxPortal hlmComboboxContent>
         @if (loading()) {
-          <div class="text-muted-foreground flex items-center gap-2 p-3 text-sm"><hlm-spinner class="size-4" /> Buscando…</div>
+          <div class="text-muted-foreground flex items-center gap-2 p-3 text-sm"><hlm-spinner /> Buscando…</div>
         } @else {
           <hlm-combobox-empty>{{ emptyText() }}</hlm-combobox-empty>
         }

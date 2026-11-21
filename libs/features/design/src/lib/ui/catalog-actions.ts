@@ -37,12 +37,13 @@ import {
         </app-inline>
       </app-section>
 
-      <app-section title="app-icon-button + appTooltip" description="Solo icono; la etiqueta es obligatoria (accesibilidad)">
+      <app-section title="app-icon-button + appTooltip" description="El label del icon-button es su nombre accesible y su tooltip; appTooltip agrega uno a cualquier otro elemento">
         <app-inline>
-          <app-icon-button icon="lucidePencil" label="Editar" appTooltip="Editar" />
-          <app-icon-button icon="lucideTrash2" label="Eliminar" variant="outline" appTooltip="Eliminar" />
+          <app-icon-button icon="lucidePencil" label="Editar" />
+          <app-icon-button icon="lucideTrash2" label="Eliminar" variant="outline" />
           <app-icon-button icon="lucidePrinter" label="Imprimir" variant="secondary" size="sm" />
           <app-icon-button icon="lucideRefreshCw" label="Actualizar" variant="primary" size="lg" />
+          <app-button variant="outline" leftIcon="lucideDownload" appTooltip="Descarga el listado en CSV" appTooltipPosition="bottom">Exportar</app-button>
         </app-inline>
       </app-section>
 

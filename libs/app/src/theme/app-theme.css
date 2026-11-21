@@ -942,6 +942,7 @@
   --app-scrollbar-thumb: 180 10% 72%;
   --app-scrollbar-thumb-hover: 180 10% 62%;
   --app-scrollbar-track: transparent;
+  --app-scrollbar-size: 6px;
 }
 
 .dark {
@@ -1553,3 +1554,40 @@ pre {
 [data-sonner-toaster] [data-sonner-toast][data-type='info'] [data-icon] { color: hsl(var(--app-alert-icon-info)); }
 [data-sonner-toaster] [data-sonner-toast][data-type='warning'] [data-icon] { color: hsl(var(--app-alert-icon-warning)); }
 [data-sonner-toaster] [data-sonner-toast][data-type='error'] [data-icon] { color: hsl(var(--app-alert-icon-danger)); }
+
+/* ============================================================================
+   Scrollbars finos en toda la app.
+   - Chrome, Edge, Safari y Opera: pseudo-elementos ::-webkit-scrollbar (6 px,
+     sin flechas, pulgar redondeado).
+   - Firefox: no tiene esos pseudo-elementos; usa `scrollbar-width: thin`
+     (~8 px, el mínimo que permite) y `scrollbar-color`.
+   Ojo: si Chrome ve `scrollbar-width`/`scrollbar-color` ignora los
+   ::-webkit-scrollbar, por eso esas dos propiedades van solo para Firefox.
+============================================================================ */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--app-scrollbar-thumb)) var(--app-scrollbar-track);
+  }
+}
+
+::-webkit-scrollbar {
+  width: var(--app-scrollbar-size);
+  height: var(--app-scrollbar-size);
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: var(--app-scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--app-scrollbar-thumb));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--app-scrollbar-thumb-hover));
+}
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}

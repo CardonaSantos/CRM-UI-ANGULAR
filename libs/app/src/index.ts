@@ -30,6 +30,7 @@ export * from './lib/overlay/app-drawer';
 export * from './lib/overlay/app-dialog';
 export * from './lib/overlay/app-confirm';
 export * from './lib/overlay/app-popover';
+export * from './lib/overlay/app-tooltip';
 
 // Feedback
 export * from './lib/feedback/app-toast';

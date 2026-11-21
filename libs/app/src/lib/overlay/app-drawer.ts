@@ -9,7 +9,7 @@ import { HlmSheetImports } from '@nova/ui/sheet';
   selector: 'app-drawer',
   imports: [HlmSheetImports],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'contents' },
+  host: { '[attr.title]': 'null', class: 'contents' },
   template: `
     <hlm-sheet [side]="side()" [state]="open() ? 'open' : 'closed'" (stateChanged)="open.set($event === 'open')">
       <hlm-sheet-content *hlmSheetPortal="let ctx" closeLabel="Cerrar" class="gap-0 p-0">

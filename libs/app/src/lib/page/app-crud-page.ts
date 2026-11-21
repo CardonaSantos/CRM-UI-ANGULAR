@@ -15,7 +15,7 @@ import { type AppBreadcrumb, AppPage, type AppPageAction } from './app-page';
   selector: 'app-crud-page',
   imports: [AppPage, AppDataTable],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'contents' },
+  host: { '[attr.title]': 'null', class: 'contents' },
   template: `
     <app-page [title]="title()" [description]="description()" [breadcrumbs]="breadcrumbs()" [actions]="pageActions()">
       <app-data-table

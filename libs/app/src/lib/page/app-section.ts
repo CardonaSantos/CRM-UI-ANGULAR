@@ -8,7 +8,7 @@ import { AppTab, AppTabs, type AppTabItem } from '../surfaces/app-tabs';
 @Component({
   selector: 'app-section',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[class]': 'hostClass()' },
+  host: { '[attr.title]': 'null', '[class]': 'hostClass()' },
   template: `
     @if (title()) {
       <header class="flex flex-wrap items-start justify-between gap-2">

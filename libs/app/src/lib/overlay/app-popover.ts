@@ -1,10 +1,7 @@
-import { ChangeDetectionStrategy, Component, Directive, computed, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, model } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { HlmButton } from '@nova/ui/button';
 import { HlmPopoverImports } from '@nova/ui/popover';
-import { BrnTooltip, type BrnTooltipPosition, provideBrnTooltipDefaultOptions } from '@spartan-ng/brain/tooltip';
-import { DEFAULT_TOOLTIP_CONTENT_CLASSES, DEFAULT_TOOLTIP_SVG_CLASS, tooltipPositionVariants } from '@nova/ui/tooltip';
-import { hlm } from '@nova/ui/utils';
 import type { AppButtonVariant } from '../primitives/app-button';
 
 const VARIANT = {
@@ -24,7 +21,7 @@ const VARIANT = {
   selector: 'app-popover',
   imports: [HlmPopoverImports, HlmButton, NgIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'inline-flex' },
+  host: { '[attr.title]': 'null', class: 'inline-flex' },
   template: `
     <hlm-popover [align]="align()" sideOffset="6" [state]="open() ? 'open' : 'closed'" (stateChanged)="open.set($event === 'open')">
       <button
@@ -63,17 +60,3 @@ export class AppPopover {
   protected readonly hlmVariant = computed(() => VARIANT[this.variant()]);
   protected readonly widthClass = computed(() => ({ sm: 'w-56', md: 'w-72', lg: 'w-96' })[this.width()]);
 }
-
-/** Tooltip de texto: `<app-icon-button appTooltip="Editar" …>`. */
-@Directive({
-  selector: '[appTooltip]',
-  providers: [
-    provideBrnTooltipDefaultOptions({
-      svgClasses: DEFAULT_TOOLTIP_SVG_CLASS,
-      tooltipContentClasses: DEFAULT_TOOLTIP_CONTENT_CLASSES,
-      arrowClasses: (position: BrnTooltipPosition) => hlm(tooltipPositionVariants({ position })),
-    }),
-  ],
-  hostDirectives: [{ directive: BrnTooltip, inputs: ['brnTooltip: appTooltip', 'position: appTooltipPosition'] }],
-})
-export class AppTooltip {}

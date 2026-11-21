@@ -32,7 +32,7 @@ const VARIANT = {
   selector: 'app-dropdown-menu',
   imports: [HlmDropdownMenuImports, HlmButton, NgIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'inline-flex' },
+  host: { '[attr.title]': 'null', class: 'inline-flex' },
   template: `
     <button
       hlmBtn
